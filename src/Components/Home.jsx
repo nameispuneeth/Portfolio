@@ -3,12 +3,7 @@ import { FolderClosed } from 'lucide-react';
 
 export default function Home() {
     const commands = new Map();
-    commands.set("about",
-        "\tHello! This is Puneeth Kumar, currently pursuing my 3rd year of Computer Science Engineering at RGUKT-RK Valley.\nI'm passionate about coding, problem-solving, and building cross-platform applications. I love working with technologies like React Native, JavaScript, and C++.\n" +
-        "Over the past year, I've consistently participated in coding contests on LeetCode and GeeksforGeeks, completed multiple 30-day POTD streaks, and built several small projects while learning development.\n" +
-        "My focus is on mastering DSA, improving problem-solving skills, and creating impactful software products.\n" +
-        "Type 'projects' to see what I've built, or 'skills' to know the technologies I work with!"
-    );
+    commands.set("about","Hey👋! I'm Puneeth Kumar, a passionate software developer currently pursuing my 3rd year in Computer Science Engineering at RGUKT-RKV. \nI’ve always loved messing around with code and spending late nights debugging it. I also love to solve coding problems on platforms like LeetCode and GeeksforGeeks and spending a hell of a time fixing bugs and tle issues, and have earned multiple badges along the way.\nI’m always eager to learn something new and build projects that are actually useful.")
     const [fullScreen, setFullScreen] = useState(false);
     const date = new Date().toUTCString();
 
