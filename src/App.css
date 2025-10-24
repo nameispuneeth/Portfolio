@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+
 
 #root {
   max-width: 1280px;
@@ -8,6 +6,23 @@
   padding: 2rem;
   text-align: center;
 }
+/* src/index.css or similar global CSS file */
+.thick-caret {
+  /* Change the color to ensure it stands out */
+  caret-color: #f87171; /* Example: a custom color (Tailwind red-400) */
+
+  /* Apply a very slight text-shadow to make it appear thicker/bolder */
+  /* Format: horizontal-offset vertical-offset blur-radius color */
+  text-shadow: 1px 0 0px var(--caret-color); /* This is the key trick! */
+  /* Note: You might need to adjust the shadow color if the input text color is different */
+}
+
+/* Alternatively, you can use a box-shadow approach for a different effect
+.thick-caret-alternative {
+  caret-color: blue;
+  box-shadow: 0 0 0 1px blue; 
+}
+*/
 
 .logo {
   height: 6em;
