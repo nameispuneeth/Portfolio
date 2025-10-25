@@ -1,9 +1,17 @@
-import { useState } from "react"
+import { useState ,useRef,useEffect} from "react"
 import { FolderClosed } from 'lucide-react';
 
 export default function Home() {
     const commands = new Map();
+    const terminalRef = useRef(null);
+
     const [commandRunning, setCommandRunning] = useState(false);
+
+    const [fullScreen, setFullScreen] = useState(false);
+    const date = new Date().toUTCString();
+
+    const [history, setHistory] = useState(`Last Updated On : ${date}\nRun \`--help\` to view all commands\n`);
+
     commands.set("nameiz", `\n\t---------------------\n\t|\t\t\t\t\t|\n\t|\tPuneeth Kumar\t|\n\t|\t\t\t\t\t|\n------------------------------\n`)
     commands.set("whoami", "Hey👋! I'm <b class='text-red-600'>Puneeth Kumar</b>, a passionate software developer currently pursuing my 3rd year in Computer Science Engineering at RGUKT-RKV. \nI’ve always loved messing around with code and spending late nights debugging it. I also love to solve coding problems on platforms like LeetCode and GeeksforGeeks and spending a hell of a time fixing bugs and tle issues, and have earned multiple badges along the way.\nI’m always eager to learn something new and build projects that are actually useful.")
     commands.set("edu-logs",
@@ -37,6 +45,12 @@ export default function Home() {
 
 
     );
+    useEffect(() => {
+        if (terminalRef.current) {
+          terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+        }
+      }, [history]);
+      
     const TypeWriter = (text, speed = 20) => {
         let i = 0;
         const interval = setInterval(() => {
@@ -50,10 +64,6 @@ export default function Home() {
     };
 
 
-    const [fullScreen, setFullScreen] = useState(false);
-    const date = new Date().toUTCString();
-
-    const [history, setHistory] = useState(`Last Updated On : ${date}\nRun \`--help\` to view all commands\n`);
 
     return (
         <div className={`flex flex-col justify-center items-center min-h-screen bg-[#3B3B3F] ${fullScreen ? 'p-0' : 'p-4'}`}>
@@ -71,13 +81,13 @@ export default function Home() {
                     </div>
                     <div></div>
                 </div>
-                <div className="p-2 text-left mb-10">
+                <div className="p-2 text-left mb-10 overflow-y-auto" style={{ scrollBehavior: 'smooth' }}   ref={terminalRef}                >
                     <pre className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: history }}
                     ></pre>
                     {!commandRunning &&
                         <div className="flex gap-1 mt-4">
                             <h1>{'C:\\Users\\Puneeth> '}</h1>
-                            <input type="text" className="bg-transparent outline-none caret-white text-white font-medium thick-caret w-full" onKeyDown={(e) => {
+                            <input type="text" autoFocus className="bg-transparent outline-none caret-white text-white font-medium thick-caret w-full" onKeyDown={(e) => {
                                 const text = e.target.value.trim();
                                 if (e.key === "Enter") {
                                     if (text === "clear") {
@@ -87,12 +97,12 @@ export default function Home() {
                                         let curr = history;
                                         curr += `\nC:\\Users\\Puneeth> ${e.target.value}\n`;
                                         setHistory(curr);
-                                        curr="";
+                                        curr = "";
                                         for (let keys of commands.keys()) {
                                             curr += `${keys}\n`;
                                         }
                                         setCommandRunning(true);
-                                        TypeWriter(`\n${curr}`, 20); 
+                                        TypeWriter(`\n${curr}`, 20);
                                     }
                                     else if (text !== "") {
                                         if (commands.has(text)) {
