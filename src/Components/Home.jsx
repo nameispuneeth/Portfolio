@@ -43,7 +43,63 @@ export default function Home() {
         ">>> Coding Profiles Fetched in <b class='text-green-500'>2580ms</b>."
     );
     commands.set("cd projects",">>> Switching To Projects Directory.....<br/>"+`> Located 4 Repositories : <br/>\t1.CodeBite<br/>\t2.Civiq<br>\t3.GPA Calculator<br/>\t4.Currency Convertor<br/>`+">>> Run Project Name For Details");
- commands.set("codebite","\t----------------------\n"+"\t CodeBite - OnlineIDE\n"+"\t----------------------\n"+"\t CodeBite Is An OnlineIDE with AI Integrated, where user can run code in browser directly without installing any package.It features AI integration for coding assistance and supports saving, updating, and deleting your files.It is build for the speed and simplicity.No Downloads,No Setup,just code and run.\n"+"Live Demo : <a href='https://codebite-onlineide-puneeth.vercel.app' target='_blank' class='text-blue-400 underline'>CodeBite</a>\n"+"GitHub : <a href='https://github.com/nameispuneeth/OnlineIDE' target='_blank' class='text-blue-400 underline'>CodeBite</a>\n"+"Features : \n\t> Real Time Code Execution With I/O Operations.\n\t> Supports Upto 7 Languages.\n\t> AI-Powered Coding Assistance.\n\t> Save,Update,Download and Delete Files.\n\t> User authentication & security using JWT and bcrypt\n\t> Clean & Minimal Interface\n"+"TechStack : \n\t Frontend : ReactJS,TailWind CSS \n\t Backend : Node.js,Express.js\n\t Authentication and Email : JWT,Bcrypt,NodeMailer \n\t DataBase : MongoDB \n\t Code Execution : Judge0 API")
+    commands.set("codebite","\t----------------------\n"+"\t CodeBite - OnlineIDE\n"+"\t----------------------\n"+"\t CodeBite Is An OnlineIDE with AI Integrated, where user can run code in browser directly without installing any package.It features AI integration for coding assistance and supports saving, updating, and deleting your files.It is build for the speed and simplicity.No Downloads,No Setup,just code and run.\n"+"Live Demo : <a href='https://codebite-onlineide-puneeth.vercel.app' target='_blank' class='text-blue-400 underline'>CodeBite</a>\n"+"GitHub : <a href='https://github.com/nameispuneeth/OnlineIDE' target='_blank' class='text-blue-400 underline'>CodeBite</a>\n"+"Features : \n\t> Real Time Code Execution With I/O Operations.\n\t> Supports Upto 7 Languages.\n\t> AI-Powered Coding Assistance.\n\t> Save,Update,Download and Delete Files.\n\t> User authentication & security using JWT and bcrypt\n\t> Clean & Minimal Interface\n"+"TechStack : \n\t Frontend : ReactJS,TailWind CSS \n\t Backend : Node.js,Express.js\n\t Authentication and Email : JWT,Bcrypt,NodeMailer \n\t DataBase : MongoDB \n\t Code Execution : Judge0 API")
+    commands.set("civiq", 
+        "\t----------------------\n" +
+        "\t Civiq - Issue Reporting App\n" +
+        "\t----------------------\n" +
+        "-> Civiq is a web app to report civic issues like potholes, garbage, and other public concerns.\n" +
+        "-> Users can submit issues with images and auto-captured location (longitude & latitude).\n" +
+        "-> And admin can assign these issues to respective department employees and changes status from pending to inprogress.\n" +
+        "-> Then these employees finish their alloted issues and updates admin where he again chnages status from inprogress to completed.\n" +
+        "-> Issues move through states: Pending → InProgress → Finished, with role-based control.\n\n" +
+
+        "Team Project : Puneeth (Backend + Some Frontend), Jaweed (Most Frontend)\n" +
+        "Live Demo : <a href='https://civiqconnectbypj.vercel.app/' target='_blank' class='text-blue-400 underline'>Civiq</a>\n" +
+        "Github : <a href='https://github.com/nameispuneeth/Hackathon' target='_blank' class='text-blue-400 underline'>Civiq</a>\n" +
+        "Features : \n" +
+        "\t> User can report issues with images and location\n" +
+        "\t> Admin can assign issues to employees and approve completion\n" +
+        "\t> Employees can view assigned issues and mark them finished\n" +
+        "\t> Users can rate issues after completion\n" +
+        "\t> Admin has analytics & filtering of issues by status\n" +
+        "\t> Admin can manage employees and departments\n" +
+        "\t> Role-based access control and secure login with JWT\n" +
+        "TechStack : \n" +
+        "\t Frontend : ReactJS, Tailwind CSS, Material UI\n" +
+        "\t Backend : Node.js, Express.js\n" +
+        "\t Database : MongoDB\n" +
+        "\t APIs : GeoLocation API For auto-location, Cloudinary API For Image upload & preview\n"+
+        "Future Enhancements : \n"+
+        "-> Integrating AI to set a priority to issues where admin can assign based on the priority.\n"+
+        "-> Adding Chat Feature Between Admin and Employee"
+    );
+    commands.set("gpa-calc", 
+        "\t------------------\n" +
+        "\t  GPA Calculator\n" +
+        "\t------------------\n" +
+        "-> GPA Calculator is a frontend web application where user can check his cgpa and sgpa with ease.\n" +
+        "-> Arranged virtual charts which helps users to track their academic performance over time. \n" +
+        "-> Very Clean And Responsive UI which makes it smooth to use.\n" +
+        
+
+        "Live Demo : <a href='https://gpa-calculator-puneeth.vercel.app/' target='_blank' class='text-blue-400 underline'>GPA Calculator</a>\n" +
+        "Github : <a href='https://github.com/nameispuneeth/cgpa_calc' target='_blank' class='text-blue-400 underline'>GPA Calculator</a>\n" +
+        // "Features : \n" +
+        // "\t> User can report issues with images and location\n" +
+        // "\t> Admin can assign issues to employees and approve completion\n" +
+        // "\t> Employees can view assigned issues and mark them finished\n" +
+        // "\t> Users can rate issues after completion\n" +
+        // "\t> Admin has analytics & filtering of issues by status\n" +
+        // "\t> Admin can manage employees and departments\n" +
+        // "\t> Role-based access control and secure login with JWT\n" +
+        "TechStack : \n" +
+        "\tReact JS, TailWind CSS, Chart.js\n"+
+        "Future Enhancements : \n"+
+        "-> Integrating AI for settin a priority to issues where admin can assign based on the priority.\n"+
+        "-> Adding Chat Feature Between Admin and Employee to discuss about funds,status of repair"
+    );
+    
             useEffect(() => {
         if (terminalRef.current) {
           terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
@@ -90,18 +146,18 @@ export default function Home() {
                                 const text = e.target.value.trim();
                                 if (e.key === "Enter") {
                                     if (text === "clear") {
-                                        setHistory(`Last Updated On : ${date}\nEnter --help to view all commands\n`);
+                                        setHistory(`Last Updated On : ${date}\nRun \`--help\` to view all commands\n`);
                                     }
                                     else if (text === "--help") {
                                         let curr = history;
-                                        curr += `\nC:\\Users\\Puneeth> ${e.target.value}\n`;
+                                        curr += `\nC:\\Users\\Puneeth> ${e.target.value}`;
                                         setHistory(curr);
                                         curr = "";
                                         for (let keys of commands.keys()) {
-                                            curr += `${keys}\n`;
+                                            curr += `\n${keys}`;
                                         }
                                         setCommandRunning(true);
-                                        TypeWriter(`\n${curr}`, 20);
+                                        TypeWriter(`\n${curr}`, 50);
                                     }
                                     else if (text !== "") {
                                         if (commands.has(text)) {
