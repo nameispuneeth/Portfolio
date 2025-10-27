@@ -42,13 +42,21 @@ export default function Home() {
         "Hacker Rank: <a href='https://www.hackerrank.com/profile/puneeth0121' target='  _blank' class='text-blue-400 underline'>puneeth0121</a><br/>" +
         ">>> Coding Profiles Fetched in <b class='text-green-500'>2580ms</b>."
     );
-    commands.set("cd projects",">>> Switching To Projects Directory.....<br/>"+`> Located 4 Repositories : <br/>\t1.CodeBite<br/>\t2.Civiq<br>\t3.GPA Calculator<br/>\t4.Currency Convertor<br/>`+">>> Run Project Name For Details");
+    commands.set("sudo apt skills",
+        "<b>Skills :</b>\n"+
+        "<b>Languages : </b> C++, Python, JavaScript\n"+
+        "<b>Frontend : </b>HTML, ReactJS, ReactNative, CSS, TailWind CSS, Bootstrap\n"+
+        "<b>Backend : </b> Node.js, Express.js\n"+
+        "<b>Databases : </b> MongoDB, MySQL\n"+
+        "<b>Tools : </b> Git, GitHub, Rest APIs, Vercel, Netlify, JWT, Bcrypt\n"
+    )
+    commands.set("cd projects",">>> Switching To Projects Directory.....<br/>"+`> Located 4 Repositories : <br/>\t<b class='text-green-500'>1.codebite<br/>\t2.civiq<br>\t3.gpa-calc<br/>\t4.currency-converter</b><br/>`+">>> Run Project Name For Details");
     commands.set("codebite","\t----------------------\n"+"\t CodeBite - OnlineIDE\n"+"\t----------------------\n"+"\t CodeBite Is An OnlineIDE with AI Integrated, where user can run code in browser directly without installing any package.It features AI integration for coding assistance and supports saving, updating, and deleting your files.It is build for the speed and simplicity.No Downloads,No Setup,just code and run.\n"+"Live Demo : <a href='https://codebite-onlineide-puneeth.vercel.app' target='_blank' class='text-blue-400 underline'>CodeBite</a>\n"+"GitHub : <a href='https://github.com/nameispuneeth/OnlineIDE' target='_blank' class='text-blue-400 underline'>CodeBite</a>\n"+"Features : \n\t> Real Time Code Execution With I/O Operations.\n\t> Supports Upto 7 Languages.\n\t> AI-Powered Coding Assistance.\n\t> Save,Update,Download and Delete Files.\n\t> User authentication & security using JWT and bcrypt\n\t> Clean & Minimal Interface\n"+"TechStack : \n\t Frontend : ReactJS,TailWind CSS \n\t Backend : Node.js,Express.js\n\t Authentication and Email : JWT,Bcrypt,NodeMailer \n\t DataBase : MongoDB \n\t Code Execution : Judge0 API")
     commands.set("civiq", 
         "\t----------------------\n" +
         "\t Civiq - Issue Reporting App\n" +
         "\t----------------------\n" +
-        "-> Civiq is a web app to report civic issues like potholes, garbage, and other public concerns.\n" +
+        "-> Civiq is a web app to report civic issues like potholes, garbage, and other public concerns.\n" +   
         "-> Users can submit issues with images and auto-captured location (longitude & latitude).\n" +
         "-> And admin can assign these issues to respective department employees and changes status from pending to inprogress.\n" +
         "-> Then these employees finish their alloted issues and updates admin where he again chnages status from inprogress to completed.\n" +
@@ -75,30 +83,38 @@ export default function Home() {
         "-> Adding Chat Feature Between Admin and Employee"
     );
     commands.set("gpa-calc", 
-        "\t------------------\n" +
-        "\t  GPA Calculator\n" +
-        "\t------------------\n" +
-        "-> GPA Calculator is a frontend web application where user can check his cgpa and sgpa with ease.\n" +
-        "-> Arranged virtual charts which helps users to track their academic performance over time. \n" +
-        "-> Very Clean And Responsive UI which makes it smooth to use.\n" +
-        
+    "\t----------------------\n"+
+    "\t GPA Calculator - CGPA\n"+
+    "\t----------------------\n"+
+    "\t A web application designed to help students calculate their Cumulative Grade Point Average (CGPA) and Semester Grade Point Average (SGPA) efficiently.Users can input course details, including grades and credits, to compute their GPA and CGPA instantly.\n"+
+    "\nLive Demo: <a href='https://gpa-calculator-puneeth.vercel.app/' target='_blank' class='text-blue-400 underline'>GPA Calculator</a>\nGithub : <a href='https://github.com/nameispuneeth/GPA_Calculator' target='_blank' class='text-blue-400 underline'>GPA Calculator</a>"+
+    "\nFeatures: \n"+
+    "\t> Calculate SGPA and CGPA based on user inputs.\n"+
+    "\t> Add multiple semesters and courses.\n"+
+    "\t> Automatic grade point computation.\n"+
+    "\t> Graphical Representaion of SGPAs using charts. \n"+
+    "\t> Clean, responsive, and user-friendly interface.\n"+
+    "\nTechStack : "+
+    "ReactJS, Tailwind CSS, Chart.js"
+);
+commands.set("currency-converter", 
+    "\t----------------------\n"+
+    "\t Currency Converter \n"+
+    "\t----------------------\n"+
+    "\tThe Currency Converter is a web application that allows users to convert between various international currencies in real-time.It uses <b>two APIs</b> — one for <b>real-time exchange rates</b> and another for <b>fetching country flags</b> to enhance the user experience.\n"+
+    "\nLive Demo: <a href='https://currency-convertor-puneeth.vercel.app/' target='_blank' class='text-blue-400 underline'>Currency Converter</a>\nGithub : <a href='https://github.com/nameispuneeth/GPA_Calculator' target='_blank' class='text-blue-400 underline'>GPA Calculator</a>"+
+    "\nFeatures: \n"+
+    "\t> Real-time currency conversion using live data.\n"+
+    "\t> Automatic flag updates for selected currencies.\n"+
+    "\t> Fast, responsive, and mobile-friendly interface.\n"+
+    "\t> Graphical Representaion of SGPAs using charts. \n"+
+    "\t>Easy and intuitive dropdown-based currency selection.\n"+
+    "\nTechStack : \n"+
+    "\tFrontend → HTML, CSS, JavaScript<br>"+
+    "\tAPIs → ExchangeRate API & Flags API<br>"+
+    "\tDeployment → Vercel<br>"
 
-        "Live Demo : <a href='https://gpa-calculator-puneeth.vercel.app/' target='_blank' class='text-blue-400 underline'>GPA Calculator</a>\n" +
-        "Github : <a href='https://github.com/nameispuneeth/cgpa_calc' target='_blank' class='text-blue-400 underline'>GPA Calculator</a>\n" +
-        // "Features : \n" +
-        // "\t> User can report issues with images and location\n" +
-        // "\t> Admin can assign issues to employees and approve completion\n" +
-        // "\t> Employees can view assigned issues and mark them finished\n" +
-        // "\t> Users can rate issues after completion\n" +
-        // "\t> Admin has analytics & filtering of issues by status\n" +
-        // "\t> Admin can manage employees and departments\n" +
-        // "\t> Role-based access control and secure login with JWT\n" +
-        "TechStack : \n" +
-        "\tReact JS, TailWind CSS, Chart.js\n"+
-        "Future Enhancements : \n"+
-        "-> Integrating AI for settin a priority to issues where admin can assign based on the priority.\n"+
-        "-> Adding Chat Feature Between Admin and Employee to discuss about funds,status of repair"
-    );
+);
     
             useEffect(() => {
         if (terminalRef.current) {
