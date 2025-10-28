@@ -1,5 +1,5 @@
 import { useState ,useRef,useEffect} from "react"
-import { FolderClosed } from 'lucide-react';
+import { FolderClosed ,ArrowDownToLine} from 'lucide-react';
 
 export default function Home() {
     const commands = new Map();
@@ -113,8 +113,9 @@ commands.set("currency-converter",
     "\tFrontend → HTML, CSS, JavaScript<br>"+
     "\tAPIs → ExchangeRate API & Flags API<br>"+
     "\tDeployment → Vercel<br>"
-
 );
+commands.set("resume --fetch", "\n>>> Fetching Resume.... \n\n0.00s\t<b class='text-green-500'>[.....................]</b>\t0%");
+
     
             useEffect(() => {
         if (terminalRef.current) {
@@ -129,11 +130,76 @@ commands.set("currency-converter",
             i++;
             if (i >= text.length) {
                 clearInterval(interval);
-                setCommandRunning(false);
+                if (text.includes("\n0.00s\t<b class='text-green-500'>[.....................]</b>\t0%")) {
+                    setCommandRunning(true);
+                    setHistory(prev => prev.replace("\n0.00s\t<b class='text-green-500'>[.....................]</b>\t0%", ""));
+                    animateResumeProgress();
+                    setTimeout(() => setCommandRunning(false), 2000);
+                  } else {
+                    setCommandRunning(false);
+                  }
             }
         }, speed);
     };
-
+    const animateResumeProgress = () => {
+        const totalDots = 23;
+        let filled = 0;
+      
+        // Add new progress block
+        setHistory(prev =>
+          prev +
+          "<div class='flex gap-8 mt-0'>" +
+          "<p id='fetch-time'>0.00 sec</p>" +
+          "<p class='text-green-500' id='progress-bar'>[.......................]</p>" +
+          "<p id='progress-perc'>0%</p>" +
+          "</div>"
+        );
+      
+        const interval = setInterval(() => {
+          filled++;
+          const perc = Math.round((filled / totalDots) * 100);
+          const time = (filled * 0.05).toFixed(2);
+          const progress = `[${"#".repeat(filled)}${".".repeat(totalDots - filled)}]`;
+      
+          setHistory(prev => {
+            const pattern = /<div class='flex gap-8 mt-0'>.*?<\/div>/gs;
+            const matches = [...prev.matchAll(pattern)];
+            if (matches.length === 0) return prev;
+      
+            const lastMatch = matches[matches.length - 1];
+            return (
+              prev.slice(0, lastMatch.index) +
+              `<div class='flex gap-8 mt-0'>
+                <p id='fetch-time'>${time} sec</p>
+                <p class='text-green-500' id='progress-bar'>${progress}</p>
+                <p id='progress-perc'>${perc}%</p>
+              </div>` +
+              prev.slice(lastMatch.index + lastMatch[0].length)
+            );
+          });
+      
+          if (filled >= totalDots) {
+            setHistory(prev => prev +
+              `\n<div class='mt-0 p-3 min-w-32 max-w-40 min-h-14 flex justify-center items-center gap-4 border-2 border-white rounded'>
+                <div class='flex gap-2'>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                  </svg> 
+                  <p class='text-center'>Resume</p>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-to-line">
+                  <path d="M12 17V3"/>
+                  <path d="m6 11 6 6 6-6"/>
+                  <path d="M19 21H5"/>
+                </svg>
+              </div>\n>>> Resume Fetch Successful`
+            );
+            clearInterval(interval);
+          }
+        }, 50);
+      };
+      
 
 
     return (
@@ -173,7 +239,7 @@ commands.set("currency-converter",
                                             curr += `\n${keys}`;
                                         }
                                         setCommandRunning(true);
-                                        TypeWriter(`\n${curr}`, 50);
+                                        TypeWriter(`\n${curr}\nclear`, 50);
                                     }
                                     else if (text !== "") {
                                         if (commands.has(text)) {
