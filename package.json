@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.16",
+    "github-calendar": "^2.3.4",
     "lucide-react": "^0.546.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "react-github-calendar": "^4.5.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
