@@ -10,9 +10,12 @@ export default function Home() {
 
     const [fullScreen, setFullScreen] = useState(false);
     const date = new Date().toUTCString();
-
+    const [commandsHistory,setCommandHistory]=useState([]);
+    const [currCommand,setcurrCommand]=useState("");
+    const [currInd,setcurrInd]=useState(commandsHistory.length-1);
     const [history, setHistory] = useState(`Last Updated On : ${date}\nRun \`--help\` to view all commands\n`);
-
+    const commandsDesc=new Map();
+    commandsDesc.set("nameiz","Retrieves The Name Of Author");
     commands.set("nameiz", `\n\t---------------------\n\t|\t\t\t\t\t|\n\t|\tPuneeth Kumar\t|\n\t|\t\t\t\t\t|\n------------------------------\n`)
     commands.set("whoami", "Hey👋! I'm <b class='text-red-600'>Puneeth Kumar</b>, a passionate software developer currently pursuing my 3rd year in Computer Science Engineering at RGUKT-RKV. \nI’ve always loved messing around with code and spending late nights debugging it. I also love to solve coding problems on platforms like LeetCode and GeeksforGeeks and spending a hell of a time fixing bugs and tle issues, and have earned multiple badges along the way.\nI’m always eager to learn something new and build projects that are actually useful.")
     commands.set("edu-logs",
@@ -148,7 +151,7 @@ commands.set("resume --fetch", "\n>>> Fetching Resume.... \n\n0.00s\t<b class='t
         // Add new progress block
         setHistory(prev =>
           prev +
-          "<div class='flex gap-8 mt-0'>" +
+          "<div class='flex sm:gap-8 gap-4 mt-0'>" +
           "<p id='fetch-time'>0.00 sec</p>" +
           "<p class='text-green-500' id='progress-bar'>[.......................]</p>" +
           "<p id='progress-perc'>0%</p>" +
@@ -162,14 +165,14 @@ commands.set("resume --fetch", "\n>>> Fetching Resume.... \n\n0.00s\t<b class='t
           const progress = `[${"#".repeat(filled)}${".".repeat(totalDots - filled)}]`;
       
           setHistory(prev => {
-            const pattern = /<div class='flex gap-8 mt-0'>.*?<\/div>/gs;
+            const pattern = /<div class='flex sm:gap-8 gap-4 mt-0'>.*?<\/div>/gs;
             const matches = [...prev.matchAll(pattern)];
             if (matches.length === 0) return prev;
       
             const lastMatch = matches[matches.length - 1];
             return (
               prev.slice(0, lastMatch.index) +
-              `<div class='flex gap-8 mt-0'>
+              `<div class='flex sm:gap-8 gap-4 mt-0'>
                 <p id='fetch-time'>${time} sec</p>
                 <p class='text-green-500' id='progress-bar'>${progress}</p>
                 <p id='progress-perc'>${perc}%</p>
@@ -224,7 +227,7 @@ commands.set("resume --fetch", "\n>>> Fetching Resume.... \n\n0.00s\t<b class='t
                     {!commandRunning &&
                         <div className="flex gap-1 mt-4">
                             <h1>{'C:\\Users\\Puneeth> '}</h1>
-                            <input type="text" autoFocus className="bg-transparent outline-none caret-white text-white font-medium thick-caret w-full" onKeyDown={(e) => {
+                            <input type="text" autoFocus className="bg-transparent outline-none caret-white text-white font-medium thick-caret w-full" value={currCommand} onChange={(e)=>setcurrCommand(e.target.value)} onKeyDown={(e) => {
                                 const text = e.target.value.trim();
                                 if (e.key === "Enter") {
                                     if (text === "clear") {
@@ -232,14 +235,22 @@ commands.set("resume --fetch", "\n>>> Fetching Resume.... \n\n0.00s\t<b class='t
                                     }
                                     else if (text === "--help") {
                                         let curr = history;
-                                        curr += `\nC:\\Users\\Puneeth> ${e.target.value}`;
+                                        curr += `\nC:\\Users\\Puneeth> ${e.target.value}\n`;
                                         setHistory(curr);
-                                        curr = "";
-                                        for (let keys of commands.keys()) {
-                                            curr += `\n${keys}`;
+                                        curr = "<table key=>";
+                                        let commandsArray=Array.from(commands.keys());
+                                        
+                                        for(let i=0;i+1<commandsArray.length;i+=2){
+                                            curr+=`<tr><td>${commandsArray[i]}<td><td> | </td><td>${commandsArray[i+1]}</td></tr>`
                                         }
+                                        if(commandsArray.length%2){
+                                            curr+=`<tr><td>${commandsArray[commandsArray.length-1]}</td><td> | </td><td>Clear</td></tr>`
+                                        }else{
+                                            curr+='<tr><td>Clear</td><td></td><td></td></tr>';
+                                        }
+                                        curr+="</table>"
                                         setCommandRunning(true);
-                                        TypeWriter(`\n${curr}\nclear`, 50);
+                                        TypeWriter(`\n${curr}\n`, 2);
                                     }
                                     else if (text !== "") {
                                         if (commands.has(text)) {
@@ -250,8 +261,26 @@ commands.set("resume --fetch", "\n>>> Fetching Resume.... \n\n0.00s\t<b class='t
                                             setHistory(prev => prev + `\nC:\\Users\\Puneeth> ${text}\nCommand Not Found\n`);
                                         }
                                     }
+                                    console.log(e.target.value)
+                                    let tempArr=commandsHistory;
+                                    tempArr.push(e.target.value);
+                                    setCommandHistory(tempArr);
+                                    setcurrInd(tempArr.length);
                                     e.target.value = "";
-
+                                    console.log(tempArr);
+                                    setcurrCommand("");
+                                }else if(e.key=="ArrowUp"){
+                                    if(currInd+1<commandsHistory.length){
+                                        setcurrCommand(commandsHistory[currInd+1]);
+                                        setcurrInd(currInd+1);
+                                    }
+                                    
+                                }
+                                else if(e.key=="ArrowDown"){
+                                    if(currInd-1>=0){
+                                        setcurrCommand(commandsHistory[currInd-1]);
+                                        setcurrInd(currInd-1);
+                                    }
                                 }
                             }}
                             ></input>
