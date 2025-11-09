@@ -168,7 +168,6 @@
                 const response = await fetch("https://api.github.com/repos/nameispuneeth/portfolio/commits");
                 const data = await response.json();
                 date.current = new Date(data[0].commit.author.date).toString();
-                console.log(date.current)
                 setHistory(`Last Updated On : ${date.current}\nRun \`--help\` to view all commands\n`);
             }
             fetchLastCommitDate();
@@ -363,7 +362,6 @@
                                             setcurrCommand("");
                                             setcurrInd(commandsHistory.length)
                                         }
-                                        console.log(currInd);
 
                                     }
                                     else if (e.key == "ArrowUp") {
@@ -371,7 +369,6 @@
                                             setcurrCommand(commandsHistory[currInd - 1]);
                                             setcurrInd(currInd - 1);
                                         }
-                                        console.log(currInd);
 
                                     }
                                 }}
