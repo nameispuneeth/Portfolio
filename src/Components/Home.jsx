@@ -245,7 +245,7 @@
                             <p class="text-center m-0 leading-none">Resume</p>
                           </div>
                         
-                          <a href="#" target="_blank" rel="noopener noreferrer"
+                          <a href="https://drive.google.com/file/d/1NVG4ROv3WdPbfLqjiQRtGlMk2K7BaISC/view" target="_blank" rel="noopener noreferrer"
                              class="flex items-center justify-center leading-none"
                              aria-label="Download resume">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-to-line">
