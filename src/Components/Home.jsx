@@ -1,7 +1,5 @@
-    import GitHubCalendar from "react-github-calendar";
-
     import { useState, useRef, useEffect } from "react"
-    import { FolderClosed, ArrowDownToLine } from 'lucide-react';
+    import { FolderClosed, } from 'lucide-react';
 
     export default function Home() {
         const commands = new Map();
@@ -28,7 +26,7 @@
 
         const themeBg={
             theme1: "bg-black text-white",
-            theme2: "bg-gray-900 text-indigo-400",
+            theme2: "bg-gray-900 text-indigo-300",
             theme3: "bg-[#473a2e] text-orange-500",
             theme4: "bg-emerald-950 text-green-500", 
             theme5: "bg-gray-300 text-gray-950",
@@ -38,8 +36,15 @@
             theme1: "text-white caret-white",
             theme2: "text-purple-400 caret-blue-400",
             theme3: "text-gray-300 caret-white",
-            theme4: "text-green-700 caret-white", 
+            theme4: "text-green-600 caret-white", 
             theme5: "text-black caret-black",
+        }
+        const PreText={
+            theme1: "text-white ",
+            theme2: "text-indigo-700",
+            theme3: "text-gray-700 ",
+            theme4: "text-green-700 ", 
+            theme5: "text-black ",
         }
         const HeaderTheme={
             theme1: "bg-gray-800 ",
@@ -52,11 +57,11 @@
         const projectsMap = new Map();
         commands.set("nameiz", `
             <pre style="font-family: monospace; font-variant-ligatures: none;">
-            ____                         _   _     
-            |  _ \\ _   _ _ __   ___  ___| |_| |__  
-            | |_) | | | | '_ \\ / _ \\/ _ \\ __| '_ \\ 
-            |  __/| |_| | | | |  __/  __/ |_| | | |
-            |_|    \\__,_|_| |_|\\___|\\___|\\__|_| |_|
+ ____                        _   _     
+|  _ \\ _   _ _ __   ___  ___| |_| |__  
+| |_) | | | | '_ \\ / _ \\/ _ \\ __| '_ \\ 
+|  __/| |_| | | | |  __/  __/ |_| | | |
+|_|    \\__,_|_| |_|\\___|\\___|\\__|_| |_|
             </pre>
             `);
 
@@ -165,10 +170,14 @@
 
         useEffect(() => {
             const fetchLastCommitDate = async () => {
+                try{
                 const response = await fetch("https://api.github.com/repos/nameispuneeth/portfolio/commits");
                 const data = await response.json();
                 date.current = new Date(data[0].commit.author.date).toString();
                 setHistory(`Last Updated On : ${date.current}\nRun \`--help\` to view all commands\n`);
+                }catch(e){
+                    date.current=new Date().toString();
+                }
             }
             fetchLastCommitDate();
         }, [])
@@ -274,8 +283,8 @@
                             <div className="bg-green-500 rounded-full w-3 h-3 cursor-pointer" onClick={() => setFullScreen(true)}></div>
                         </div>
                         <div className="flex justify-center items-center gap-2">
-                            <FolderClosed size={16} color="white" />
-                            <h1 className="text-center text-white">puneeth -- portfolio -- bash</h1>
+                            <FolderClosed size={16} color="white" className="hidden md:block" />
+                            <h1 className="text-center text-white text-sm md:text-base sm:mr-2">puneeth -- portfolio -- bash</h1>
                         </div>
                         <div className="hidden md:block">
                             <select
@@ -288,12 +297,11 @@
                                 <option value="theme5">Terminal Light</option>
 
                             </select>
-
-
                         </div>
+                        <div className="md:hidden"></div>
                     </div>
                     <div className="p-2 text-left mb-10 overflow-y-auto" style={{ scrollBehavior: 'smooth' }} ref={terminalRef}                >
-                        <pre className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: history }}
+                        <pre className={`${PreText[theme]} whitespace-pre-wrap mb-6`} dangerouslySetInnerHTML={{ __html: history }}
                         ></pre>
                         {!commandRunning &&
                             <div className="flex gap-1 mt-4">
