@@ -263,8 +263,7 @@
                               <path d="M19 21H5"/>
                             </svg>
                           </a>
-                        </div><br/>>>> Resume Fetch Successful
-                        `);
+                        </div><br/>>>> Resume Fetch Successful\n`);
                         
                     clearInterval(interval);
                 }
@@ -275,7 +274,7 @@
         return (
             <div className={`flex flex-col justify-center items-center min-h-screen bg-[#3B3B3F] ${fullScreen ? 'p-0' : 'p-4'}`}>
                 <div className={`${themeBg[theme]} w-full font-mono shadow-2xl rounded-lg
-    ${fullScreen ? 'w-full min-h-screen m-0' : 'm-2 sm:w-[60%] w-[90%] h-auto min-h-[24rem]'}`}>
+    ${fullScreen ? 'w-full min-h-screen m-0' : 'm-2 sm:w-[60%] w-[90%] h-auto min-h-[36rem]'}`}>
                     <div className={`${HeaderTheme[theme]} w-full mb-2 flex items-center justify-between p-1 rounded-md`}>
                         <div className="flex gap-2">
                             <div className="ml-1 bg-red-500 rounded-full w-3 h-3 cursor-pointer"></div>
@@ -305,14 +304,18 @@
                         ></pre>
                         {!commandRunning &&
                             <div className="flex gap-1 mt-4">
-                                <h1>{`C:\\Users\\Puneeth>${projectsFolderOpen ? 'Projects>' : ''} `}</h1>
-                                <input type="text" autoFocus className={`bg-transparent ${inputTheme[theme]} outline-none font-medium thick-caret w-full`} value={currCommand} onChange={(e) => setcurrCommand(e.target.value)} onKeyDown={(e) => {
+                                <h1>{`C:\\Users\\Puneeth>${projectsFolderOpen ? 'Projects>' : ''}`}</h1>
+                                <input type="text" autoFocus className={`bg-transparent ${inputTheme[theme]} outline-none font-medium thick-caret w-full ml-1`} value={currCommand} onChange={(e) => setcurrCommand(e.target.value)} onKeyDown={(e) => {
                                     const text = e.target.value.trim();
                                     if (e.key === "Enter") {
                                         if (text === "clear") {
                                             setHistory(`Last Updated On : ${date.current}\nRun \`--help\` to view all commands\n`);
                                         }
-                                        else if (text === "--help") {
+                                        else if(text==""){
+                                            const newCmd = `\nC:\\Users\\Puneeth>${projectsFolderOpen ? 'Projects>' : ''} ${text}\n`
+                                            setHistory(prev => prev + newCmd);
+                                        }
+                                        else if (text === "--help" || text=="ls") {
                                             let curr = history;
                                             curr += `\nC:\\Users\\Puneeth>${projectsFolderOpen ? 'Projects>' : ''} ${e.target.value}\n`;
                                             setHistory(curr);
