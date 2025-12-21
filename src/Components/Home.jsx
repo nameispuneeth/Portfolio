@@ -96,6 +96,40 @@
             "-> Integrating AI to set a priority to issues where admin can assign based on the priority.\n" +
             "-> Adding Chat Feature Between Admin and Employee"
         );
+        projectsMap.set("anonmes",
+            "\t-----------------------------------\n" +
+            "\t AnonMes - Secret Messaging Platform\n" +
+            "\t-----------------------------------\n" +
+            "-> AnonMes is a platform that generates a unique URL for each user.\n" +
+            "-> Anyone with this URL can send secret messages to the user anonymously.\n" +
+            "-> Real-time message delivery is implemented using WebSockets.\n" +
+            "-> Users can copy and share their unique link easily.\n" +
+            "-> Supports both normal email/password authentication and Google authentication.\n" +
+            "-> Users have full control over their anonymous link settings.\n\n" +
+
+            "Live Demo : <a href='https://anon-mes.vercel.app/' target='_blank' class='text-blue-400 underline'>AnonMes</a>\n" +
+            "Github : <a href='https://github.com/nameispuneeth/AnonMes' target='_blank' class='text-blue-400 underline'>AnonMes</a>\n" +
+            "Features : \n" +
+            "\t> Unique anonymous URL generation for each user\n" +
+            "\t> Send secret messages without revealing sender identity\n" +
+            "\t> Real-time message updates using WebSockets\n" +
+            "\t> Email/Password authentication and Google OAuth\n" +
+            "\t> Copy & share anonymous message link\n" +
+            "\t> Set expiry date for anonymous links\n" +
+            "\t> Create custom URLs\n" +
+            "\t> Regenerate or create a new anonymous link anytime\n" +
+            "\t>Delete \n" +
+            
+            "TechStack : \n" +
+            "\t Frontend : ReactJS, Tailwind CSS\n" +
+            "\t Backend : Node.js, Express.js, WebSockets\n" +
+            "\t Database : MongoDB\n" +
+            "\t Authentication : JWT, Google OAuth\n" +
+            "Future Enhancements : \n" +
+            "-> Message moderation and spam prevention\n" +
+            "-> Optional message reactions or replies\n" +
+            "-> Analytics on received messages\n"
+        );
         projectsMap.set("gpa-calc",
             "\t----------------------\n" +
             "\t GPA Calculator - CGPA\n" +
@@ -165,7 +199,7 @@
             "<b>Databases : </b> MongoDB, MySQL\n" +
             "<b>Tools : </b> Git, GitHub, Rest APIs, Vercel, Netlify, JWT, Bcrypt\n"
         )
-        commands.set("cd projects", ">>> Switching To Projects Directory.....<br/>" + `> Located 4 Repositories : <br/>\t<b class='text-green-500'>1.codebite<br/>\t2.civiq<br>\t3.gpa-calc<br/>\t4.currency-converter</b><br/>` + ">>> Run Project Name For Details");
+        commands.set("cd projects", ">>> Switching To Projects Directory.....<br/>" + `> Located 5 Repositories : <br/>\t<b class='text-green-500'>1.codebite<br/>\t2.civiq<br>\t3.anonmes<br/>\t4.gpa-calc<br/>\t5.currency-converter</b><br/>` + ">>> Run Project Name For Details");
         commands.set("resume --fetch", "\n>>> Fetching Resume.... \n\n0.00s\t<b class='text-green-500'>[.....................]</b>\t0%");
 
         useEffect(() => {
@@ -254,7 +288,7 @@
                             <p class="text-center m-0 leading-none">Resume</p>
                           </div>
                         
-                          <a href="https://drive.google.com/file/d/1qrAPurvYdPrDwuh4qELslbS9YE9wKLga/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+                          <a href="https://drive.google.com/file/d/16JtrpDo-y9_V2cuWCaSrP_JO1RgVccYU/view?usp=sharing" target="_blank" rel="noopener noreferrer"
                              class="flex items-center justify-center leading-none"
                              aria-label="Download resume">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-down-to-line">
@@ -330,7 +364,6 @@
                                         }
                                         else if (text == "cd projects") {
                                             setprojectsFolderOpen(true);
-                            
                                             setHistory(prev => prev + `\nC:\\Users\\Puneeth>${projectsFolderOpen ? 'Projects>' : ''} ${text}\n`);
                                             setCommandRunning(true);
                                             TypeWriter(`\n${commands.get(text)}\n`, 10);
